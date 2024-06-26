@@ -9,26 +9,14 @@ import productRoute from "./routes/productRoute.js";
 import cors from "cors";
 
 dotenv.config();
-
-//db congig
 connectdb();
-
 const app = express();
-
-//middleware
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
-
-//authentication and authorization routes
 app.use("/api/v1/auth", authRoutes);
-
-//category rotes
 app.use("/api/v1/category", categoryRoutes);
-
-//product routes
 app.use("/api/v1/product", productRoute);
-
 app.get("/", (req, res) => {
   res.send("welcome on server");
 });
