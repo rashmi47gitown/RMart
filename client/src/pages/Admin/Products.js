@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  //get all products
   const getAllProducts = async () => {
     try {
       const { data } = await axios.get("/api/v1/product/get-product");
@@ -17,11 +16,10 @@ const Products = () => {
       toast.error("Something went wrong.");
     }
   };
-
-  //lifecycle method
   useEffect(() => {
     getAllProducts();
   }, []);
+  
   return (
     <Layout title={"Admin- All Product Rmart"}>
       <div className="row">
