@@ -20,8 +20,8 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     category: {
-      type: mongoose.ObjectId, //getting category from category model using id
-      ref: "Category", //export default mongoose.model("Category", categorySchema);
+      type: mongoose.ObjectId, 
+      ref: "Category",
       required: true,
     },
     quantity: {
