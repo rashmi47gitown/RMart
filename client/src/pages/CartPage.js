@@ -15,21 +15,7 @@ const CartPage = () => {
   const [clientToken, setClientToken] = useState("");
   const [instance, setInstance] = useState("");
   const [loading, setLoading] = useState(false);
-  //below code - not working , ERROR : Expected an assignment or function call and instead saw an expression  no-unused-expressions
-  // const totalPrice = () => {
-  //   try {
-  //     let total = 0;
-  //     cart?.map((item) => {
-  //       total = total + item.price;
-  //     });
-  //     return total.toLocaleString("en-US", {
-  //       style: "currency",
-  //       currency: "USD",
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+
   const totalPrice = () => {
     // Validate cart existence to prevent potential errors
     if (!cart) {
@@ -58,7 +44,7 @@ const CartPage = () => {
       console.log(error);
     }
   };
-  //pay token===================================================
+ 
   const getToken = async () => {
     try {
       const { data } = await axios.get("/api/v1/product/braintree/token");
@@ -70,7 +56,7 @@ const CartPage = () => {
   useEffect(() => {
     getToken();
   }, [auth?.token]);
-  //payment====================================================
+
   const handlePayment = async () => {
     try {
       const { nonce } = await instance.requestPaymentMethod();
@@ -88,6 +74,7 @@ const CartPage = () => {
       setLoading(false);
     }
   };
+  
   return (
     <Layout title={"Cart page - Rmart"}>
       <div className="cart-page">
