@@ -6,17 +6,13 @@ import toast from "react-hot-toast";
 import { useAuth } from "../../context/auth";
 
 const Profile = () => {
-  //constext
   const [auth, setAuth] = useAuth();
-
-  //state
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
 
-  //get user date
   useEffect(() => {
     const { email, name, phone, address, password } = auth?.user;
     setName(name);
@@ -25,7 +21,6 @@ const Profile = () => {
     setAddress(address);
   }, [auth?.user]);
 
-  //form function
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
