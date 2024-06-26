@@ -10,11 +10,9 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [auth, setAuth] = useAuth();
-
   const navigate = useNavigate();
   const location = useLocation();
 
-  // form function
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -39,6 +37,7 @@ const Login = () => {
       toast.error("Something went wrong");
     }
   };
+  
   return (
     <Layout>
       <div className="form-container">
