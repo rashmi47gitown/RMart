@@ -9,10 +9,8 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [answer, setAnswer] = useState("");
-
   const navigate = useNavigate();
-
-  // form function
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -32,6 +30,7 @@ const ForgotPassword = () => {
       toast.error("Something went wrong");
     }
   };
+  
   return (
     <Layout title={"Forgot Password"}>
       <div className="form-container ">
