@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken";
 export const registerController = async (req, res) => {
   try {
     const { name, email, password, phone, address, answer } = req.body;
-    //validations
     if (!name) {
       return res.send({ message: "Name is required" });
     }
@@ -25,9 +24,7 @@ export const registerController = async (req, res) => {
       return res.send({ message: "Address is required" });
     }
 
-    //check user
     const existingUser = await userModel.findOne({ email });
-    //existing user
     if (existingUser) {
       return res.status(200).send({
         success: false,
@@ -35,10 +32,7 @@ export const registerController = async (req, res) => {
       });
     }
 
-    //register user
     const hashedPassword = await hashPassword(password);
-
-    //save
     const user = await new userModel({
       name,
       email,
@@ -47,7 +41,6 @@ export const registerController = async (req, res) => {
       password: hashedPassword,
       answer,
     }).save();
-
     res.status(200).send({
       success: true,
       message: "User Register Successfully",
@@ -63,7 +56,7 @@ export const registerController = async (req, res) => {
   }
 };
 
-//login controller...........................
+
 export const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -87,7 +80,6 @@ export const loginController = async (req, res) => {
         message: "Invalid Password",
       });
     }
-    //token
     const token = await jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
@@ -113,7 +105,7 @@ export const loginController = async (req, res) => {
   }
 };
 
-//forgotPasswordController......................
+
 export const forgotPasswordController = async (req, res) => {
   try {
     const { email, answer, newPassword } = req.body;
@@ -132,9 +124,7 @@ export const forgotPasswordController = async (req, res) => {
         message: "New password is required",
       });
     }
-    //check
     const user = await userModel.findOne({ email, answer });
-    //validation
     if (!user) {
       return res.status(404).send({
         success: false,
@@ -157,17 +147,10 @@ export const forgotPasswordController = async (req, res) => {
   }
 };
 
-//test controller
-export const testController = async (req, res) => {
-  res.send("protected route");
-};
-
-//update profile
 export const updateProfileController = async (req, res) => {
   try {
     const { name, email, password, phone, address } = req.body;
     const user = await userModel.findById(req.user._id);
-    //password
     if (password && password.length < 6) {
       return res.json({ error: "Password is required and 6 character long" });
     }
