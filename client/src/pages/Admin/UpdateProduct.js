@@ -19,7 +19,6 @@ const UpdateProduct = () => {
   const [photo, setPhoto] = useState("");
   const [id, setId] = useState("");
 
-  //get single product========================
   const getSingleProduct = async () => {
     try {
       const { data } = await axios.get(
@@ -43,7 +42,6 @@ const UpdateProduct = () => {
     //eslint-disable-next-line
   }, []);
 
-  //get all categories=========================
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get("/api/v1/category/get-category");
@@ -61,8 +59,6 @@ const UpdateProduct = () => {
   }, []);
 
   const navigate = useNavigate();
-
-  //update product====================
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
@@ -89,7 +85,7 @@ const UpdateProduct = () => {
     }
   };
 
-  //delete product============
+
   const handleDelete = async () => {
     try {
       let answer = window.prompt("Are You Sure want to delete this product ? ");
